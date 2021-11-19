@@ -11,6 +11,8 @@ import (
 
 func Test_migrate_tfc_to_other(t *testing.T) {
 	skipIfMissingEnvVar(t)
+	t.Parallel()
+
 	cases := map[string]struct {
 		operations []operationSets
 	}{
@@ -47,9 +49,8 @@ func Test_migrate_tfc_to_other(t *testing.T) {
 	}
 
 	for name, tc := range cases {
-		tc := tc
+		tc := tc // rebind tc into this lexical scope
 		t.Run(name, func(t *testing.T) {
-			// t.Parallel()
 			organization, cleanup := createOrganization(t)
 			defer cleanup()
 			exp, err := expect.NewConsole(defaultOpts()...)

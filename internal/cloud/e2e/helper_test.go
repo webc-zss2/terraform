@@ -15,7 +15,7 @@ import (
 )
 
 const (
-	expectConsoleTimeout = 15 * time.Second
+	expectConsoleTimeout = 60 * time.Second
 )
 
 type tfCommand struct {

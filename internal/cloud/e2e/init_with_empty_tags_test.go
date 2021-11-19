@@ -11,8 +11,8 @@ import (
 
 func Test_init_with_empty_tags(t *testing.T) {
 	skipIfMissingEnvVar(t)
-	// t.Parallel()
 	skipWithoutRemoteTerraformVersion(t)
+	t.Parallel()
 
 	cases := map[string]struct {
 		operations []operationSets
@@ -39,9 +39,8 @@ func Test_init_with_empty_tags(t *testing.T) {
 	}
 
 	for name, tc := range cases {
-		tc := tc
+		tc := tc // rebind tc into this lexical scope
 		t.Run(name, func(t *testing.T) {
-			// t.Parallel()
 			organization, cleanup := createOrganization(t)
 			defer cleanup()
 			exp, err := expect.NewConsole(defaultOpts()...)

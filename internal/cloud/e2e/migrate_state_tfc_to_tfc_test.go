@@ -15,6 +15,8 @@ import (
 func Test_migrate_tfc_to_tfc_single_workspace(t *testing.T) {
 	skipIfMissingEnvVar(t)
 	skipWithoutRemoteTerraformVersion(t)
+	t.Parallel()
+
 	ctx := context.Background()
 
 	cases := map[string]struct {
@@ -219,6 +221,7 @@ func Test_migrate_tfc_to_tfc_single_workspace(t *testing.T) {
 	}
 
 	for name, tc := range cases {
+		tc := tc // rebind tc into this lexical scope
 		t.Run(name, func(t *testing.T) {
 			exp, err := expect.NewConsole(defaultOpts()...)
 			if err != nil {
@@ -293,6 +296,7 @@ func Test_migrate_tfc_to_tfc_single_workspace(t *testing.T) {
 func Test_migrate_tfc_to_tfc_multiple_workspace(t *testing.T) {
 	skipIfMissingEnvVar(t)
 	skipWithoutRemoteTerraformVersion(t)
+	t.Parallel()
 
 	ctx := context.Background()
 
@@ -464,6 +468,7 @@ func Test_migrate_tfc_to_tfc_multiple_workspace(t *testing.T) {
 	}
 
 	for name, tc := range cases {
+		tc := tc // rebind tc into this lexical scope
 		t.Run(name, func(t *testing.T) {
 			exp, err := expect.NewConsole(defaultOpts()...)
 			if err != nil {

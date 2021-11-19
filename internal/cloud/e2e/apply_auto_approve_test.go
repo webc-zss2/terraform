@@ -15,6 +15,7 @@ import (
 func Test_terraform_apply_autoApprove(t *testing.T) {
 	skipIfMissingEnvVar(t)
 	skipWithoutRemoteTerraformVersion(t)
+	t.Parallel()
 
 	ctx := context.Background()
 
@@ -180,9 +181,8 @@ func Test_terraform_apply_autoApprove(t *testing.T) {
 		},
 	}
 	for name, tc := range cases {
-		tc := tc
+		tc := tc // rebind tc into this lexical scope
 		t.Run(name, func(t *testing.T) {
-			// t.Parallel()
 			organization, cleanup := createOrganization(t)
 			defer cleanup()
 			exp, err := expect.NewConsole(defaultOpts()...)

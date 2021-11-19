@@ -15,6 +15,7 @@ import (
 func Test_migrate_multi_to_tfc_cloud_name_strategy(t *testing.T) {
 	skipIfMissingEnvVar(t)
 	skipWithoutRemoteTerraformVersion(t)
+	t.Parallel()
 
 	ctx := context.Background()
 
@@ -225,9 +226,8 @@ func Test_migrate_multi_to_tfc_cloud_name_strategy(t *testing.T) {
 	}
 
 	for name, tc := range cases {
-		tc := tc
+		tc := tc // rebind tc into this lexical scope
 		t.Run(name, func(t *testing.T) {
-			// t.Parallel()
 			organization, cleanup := createOrganization(t)
 			defer cleanup()
 			exp, err := expect.NewConsole(defaultOpts()...)
@@ -301,6 +301,7 @@ func Test_migrate_multi_to_tfc_cloud_name_strategy(t *testing.T) {
 func Test_migrate_multi_to_tfc_cloud_tags_strategy(t *testing.T) {
 	skipIfMissingEnvVar(t)
 	skipWithoutRemoteTerraformVersion(t)
+	t.Parallel()
 
 	ctx := context.Background()
 
@@ -513,9 +514,8 @@ func Test_migrate_multi_to_tfc_cloud_tags_strategy(t *testing.T) {
 	}
 
 	for name, tc := range cases {
-		tc := tc
+		tc := tc // rebind tc into this lexical scope
 		t.Run(name, func(t *testing.T) {
-			// t.Parallel()
 			organization, cleanup := createOrganization(t)
 			defer cleanup()
 			exp, err := expect.NewConsole(defaultOpts()...)

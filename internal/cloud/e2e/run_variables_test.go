@@ -47,6 +47,7 @@ output "test_env" {
 func Test_cloud_run_variables(t *testing.T) {
 	skipIfMissingEnvVar(t)
 	skipWithoutRemoteTerraformVersion(t)
+	t.Parallel()
 
 	cases := testCases{
 		"run variables from CLI arg": {
@@ -81,6 +82,7 @@ func Test_cloud_run_variables(t *testing.T) {
 	}
 
 	for name, tc := range cases {
+		tc := tc // rebind tc into this lexical scope
 		t.Run(name, func(t *testing.T) {
 			organization, cleanup := createOrganization(t)
 			defer cleanup()
