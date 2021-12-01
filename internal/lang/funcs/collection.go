@@ -312,7 +312,7 @@ var LookupFunc = function.New(&function.Spec{
 		}
 
 		return cty.UnknownVal(cty.DynamicPseudoType).WithMarks(markses...), fmt.Errorf(
-			"lookup failed to find '%s'", lookupKey)
+			"lookup failed to find key %s", redactIfSensitive(lookupKey, keyMarks))
 	},
 })
 
